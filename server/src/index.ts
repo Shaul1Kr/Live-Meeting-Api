@@ -7,7 +7,7 @@ import { StreamChat } from "stream-chat";
 
 dotenv.config();
 
-const { PORT, STREAM_API_KEY, STREAM_API_SEVRET, MONGO_URL } = process.env;
+const { PORT, STREAM_API_KEY, STREAM_API_SEVRET } = process.env;
 const client = StreamChat.getInstance(STREAM_API_KEY!, STREAM_API_SEVRET);
 
 const app = express();
@@ -85,13 +85,13 @@ app.post("/login", async (req, res) => {
   }
 });
 
+console.log(process.env.MONGO_URL);
+
 mongoose
-  .connect(MONGO_URL!, { dbName })
+  .connect(process.env.MONGO_URL!, { dbName })
   .then(() => {
     app.listen(PORT, () =>
       console.info(`Server is listening on port: ${PORT}`)
     );
-    //Insert users to db
-    // data();
   })
   .catch((error) => console.log(`${error} did not connect`));
