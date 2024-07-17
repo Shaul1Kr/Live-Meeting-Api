@@ -85,7 +85,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-console.log(process.env.MONGO_URL);
+console.log(process.env);
 
 mongoose
   .connect(process.env.MONGO_URL!, { dbName })
